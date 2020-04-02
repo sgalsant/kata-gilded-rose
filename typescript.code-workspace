@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.autoSave": "afterDelay",
+		"debug.allowBreakpointsEverywhere": true,
+		"liveServer.settings.CustomBrowser": "chrome",
+	}
+}

@@ -1,0 +1,14 @@
+{
+    "extends": "../tsconfig.json",
+    "references": [
+        { "path": "../src" }
+    ],
+    "compilerOptions": {
+        "outDir": "../bin",
+     /*   "baseUrl": ".",
+        "paths":{
+            "mocha": ["node_modules/mocha/mocha.js"],
+        }
+    */
+    }
+}

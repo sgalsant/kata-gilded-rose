@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>Tests</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="node_modules/mocha/mocha.css">
+  </head>
+  <body>
+
+    <div id="mocha"></div>
+    
+    <script src="node_modules/chai/chai.js"></script>
+    <script src="node_modules/mocha/mocha.js"></script>
+   
+    <script>
+        mocha.setup('bdd');
+        mocha.checkLeaks();
+    </script>
+
+    <script type="module" src="./bin/app6.test.js"></script>
+  
+  
+    <script type="module">
+      mocha.run();
+    </script>
+
+    <p>Los test se encuentra en directorio "bin" y el código a probar en "dist"</p>
+    <p>Si no se ejecuta los tests, comprobar que se han cargado las librerías "mocha" y "chai" en el directorio "node_modules"</p></p>
+  </body>
+</html>
