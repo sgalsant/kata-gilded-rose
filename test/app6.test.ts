@@ -1,16 +1,20 @@
-import {Item, Shop} from '../dist/app6.js';
+import {Item, Shop, Intervalos} from '../dist/app6.js';
 
 describe ('testing kata Gilded Rose', function() {
     function createBasicItem(name: string, sellIn: number, quality: number) {
         return new Item(name, sellIn, quality,
-            [-1, 0, Number.POSITIVE_INFINITY,
-             -2, Number.NEGATIVE_INFINITY, -1]);
+            new Intervalos([
+                -1, 0, Number.POSITIVE_INFINITY,
+                -2, Number.NEGATIVE_INFINITY, -1
+            ]));
     }
 
     function createAgedBriedItem(sellIn: number, quality: number) {
         return new Item("aged bried", sellIn, quality,
-            [1, 0, Number.POSITIVE_INFINITY,   // incrementa 1 desde 0 hasta infinito
-             2, Number.NEGATIVE_INFINITY, -1]); // incrementa 2 desde -infinito hasta -1
+            new Intervalos([
+                1, 0, Number.POSITIVE_INFINITY,   // incrementa 1 desde 0 hasta infinito
+                2, Number.NEGATIVE_INFINITY, -1
+            ])); // incrementa 2 desde -infinito hasta -1
     }
 
     function createSulfurasItem(sellIn: number, quality: number) {
@@ -21,17 +25,20 @@ describe ('testing kata Gilded Rose', function() {
 
     function createBackstageItem(sellIn: number, quality: number) {
         return new Item('Backstage', sellIn, quality,
-        [1, 11, Number.POSITIVE_INFINITY,  // incrementa 1 desde 11 hasta infinito
-         2, 5, 10,                         // incrementa 2 desde 5 hasta 10
-         3, 0, 4,                          // incrementa 3 desde 0 hasta 4
-         Number.NEGATIVE_INFINITY, Number.NEGATIVE_INFINITY, -1]) ;  // resta todo (infinito) desde -infinito hasta -1
-
+            new Intervalos([
+                1, 11, Number.POSITIVE_INFINITY,  // incrementa 1 desde 11 hasta infinito
+                2, 5, 10,                         // incrementa 2 desde 5 hasta 10
+                3, 0, 4,                          // incrementa 3 desde 0 hasta 4
+                Number.NEGATIVE_INFINITY, Number.NEGATIVE_INFINITY, -1
+            ]));  // resta todo (infinito) desde -infinito hasta -1
     }
 
     function createConjured(sellIn: number, quality: number) {
         return new Item('conjured', sellIn, quality,
-        [-2, 0, Number.POSITIVE_INFINITY, // decrementa 2 desde 0 hata infinito
-         -4, Number.NEGATIVE_INFINITY, -1]);  // decrementa 4 desde -infinito hasta -1
+            new Intervalos([
+                -2, 0, Number.POSITIVE_INFINITY, // decrementa 2 desde 0 hata infinito
+                -4, Number.NEGATIVE_INFINITY, -1
+            ]));  // decrementa 4 desde -infinito hasta -1
     }
 
     it('Items degradan en 1 la calidad y la fecha de venta', function(){

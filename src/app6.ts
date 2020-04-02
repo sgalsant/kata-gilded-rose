@@ -22,12 +22,19 @@ interface IItem {
   updateQuality();
 }
 
+interface IMapper {
+  getValue(origin: number): number;
+}
 
-class Intervalos {
+export class Intervalos implements IMapper {
   private array: Array<number>;
 
-  constructor (array: Array<number>) {
-    this.array = array;
+  constructor (array: Array<number> = null) {
+    if (array != null) {
+      this.array = [...array]; // se crea copia del array para independizarlo del array inicial
+    } else {
+      this.array = new Array<number>();
+    }
   }
 
   add(value= 0, min=Number.NEGATIVE_INFINITY , max=Number.POSITIVE_INFINITY) {
@@ -47,27 +54,29 @@ class Intervalos {
 }
 
 class Item implements IItem {
-    protected _name: string;
-    protected _sellIn: number;
-    protected _quality: number;
-    protected intervalos: Intervalos;
-    protected decSellIn: number;
+    private _name: string;
+    private _sellIn: number;
+    private _quality: number;
+    private mapperQuality: IMapper;
+    private decSellIn: number;
 
-    constructor(name: string, sellIn: number, quality: number, intervalos: Array<number>=null, decSellIn: number = -1){
+    constructor(name: string, sellIn: number, quality: number, mapperQuality: IMapper, decSellIn: number = -1){
       this._name = name;
       this._sellIn = sellIn;
       this._quality = quality;
 
       this.decSellIn = decSellIn;
-      this.intervalos = new Intervalos(intervalos);
+      this.mapperQuality = mapperQuality;
     }
 
     updateQuality() {
       this._sellIn += this.decSellIn;
      
-      this._quality += this.intervalos.getValue(this._sellIn);
+      if ((this.mapperQuality != null) && (this.mapperQuality != undefined)) {
+        this._quality += this.mapperQuality.getValue(this._sellIn);
 
-      this._quality = Math.max(0, Math.min(50, this._quality));
+        this._quality = Math.max(0, Math.min(50, this._quality));
+      }
     }
 
     get name(): string {
